@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sreeram S</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1 id="name"></h1>
+    <p id="about"></p>
+</header>
+
+<section>
+    <h2>Skills</h2>
+    <div id="skills"></div>
+</section>
+
+<section>
+    <h2>Projects</h2>
+    <div id="projects"></div>
+</section>
+
+<section>
+    <h2>Experience</h2>
+    <div id="experience"></div>
+</section>
+
+<section>
+    <h2>Education</h2>
+    <div id="education"></div>
+</section>
+
+<footer>
+    <p id="contact"></p>
+</footer>
+
+<script src="data.js"></script>
+<script>
+    // Load basic info
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("about").innerText = data.about;
+    document.getElementById("contact").innerHTML = data.contact;
+
+    // Skills
+    const skillsDiv = document.getElementById("skills");
+    data.skills.forEach(skill => {
+        const span = document.createElement("span");
+        span.className = "skill";
+        span.innerText = skill;
+        skillsDiv.appendChild(span);
+    });
+
+    // Projects
+    const projDiv = document.getElementById("projects");
+    data.projects.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="${p.image}" alt="${p.title}">
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+        `;
+
+        projDiv.appendChild(card);
+    });
+
+    // Experience
+    const expDiv = document.getElementById("experience");
+    data.experience.forEach(e => {
+        const el = document.createElement("div");
+        el.className = "card";
+        el.innerHTML = `
+            <h3>${e.role}</h3>
+            <p><b>${e.company}</b> (${e.duration})</p>
+            <p>${e.details}</p>
+        `;
+        expDiv.appendChild(el);
+    });
+
+    // Education
+    const eduDiv = document.getElementById("education");
+    data.education.forEach(e => {
+        const el = document.createElement("div");
+        el.className = "card";
+        el.innerHTML = `
+            <h3>${e.degree}</h3>
+            <p>${e.institution}</p>
+            <p>${e.details}</p>
+        `;
+        eduDiv.appendChild(el);
+    });
+</script>
+
+</body>
+</html>
