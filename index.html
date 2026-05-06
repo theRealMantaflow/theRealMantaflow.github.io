@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sreeram S</title>
+    <title>Sreeram</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="overlay"></div>
 
 <header>
     <h1 id="name"></h1>
@@ -23,23 +25,12 @@
     <div id="projects"></div>
 </section>
 
-<section>
-    <h2>Experience</h2>
-    <div id="experience"></div>
-</section>
-
-<section>
-    <h2>Education</h2>
-    <div id="education"></div>
-</section>
-
 <footer>
     <p id="contact"></p>
 </footer>
 
 <script src="data.js"></script>
 <script>
-    // Load basic info
     document.getElementById("name").innerText = data.name;
     document.getElementById("about").innerText = data.about;
     document.getElementById("contact").innerHTML = data.contact;
@@ -47,51 +38,35 @@
     // Skills
     const skillsDiv = document.getElementById("skills");
     data.skills.forEach(skill => {
-        const span = document.createElement("span");
-        span.className = "skill";
-        span.innerText = skill;
-        skillsDiv.appendChild(span);
+        const el = document.createElement("span");
+        el.className = "skill";
+        el.innerText = skill;
+        skillsDiv.appendChild(el);
     });
 
-    // Projects
+    // Projects with gallery
     const projDiv = document.getElementById("projects");
+
     data.projects.forEach(p => {
         const card = document.createElement("div");
         card.className = "card";
 
+        const gallery = document.createElement("div");
+        gallery.className = "gallery";
+
+        p.images.forEach(img => {
+            const image = document.createElement("img");
+            image.src = img;
+            gallery.appendChild(image);
+        });
+
         card.innerHTML = `
-            <img src="${p.image}" alt="${p.title}">
             <h3>${p.title}</h3>
-            <p>${p.description}</p>
+            <div class="description">${p.description}</div>
         `;
 
+        card.appendChild(gallery);
         projDiv.appendChild(card);
-    });
-
-    // Experience
-    const expDiv = document.getElementById("experience");
-    data.experience.forEach(e => {
-        const el = document.createElement("div");
-        el.className = "card";
-        el.innerHTML = `
-            <h3>${e.role}</h3>
-            <p><b>${e.company}</b> (${e.duration})</p>
-            <p>${e.details}</p>
-        `;
-        expDiv.appendChild(el);
-    });
-
-    // Education
-    const eduDiv = document.getElementById("education");
-    data.education.forEach(e => {
-        const el = document.createElement("div");
-        el.className = "card";
-        el.innerHTML = `
-            <h3>${e.degree}</h3>
-            <p>${e.institution}</p>
-            <p>${e.details}</p>
-        `;
-        eduDiv.appendChild(el);
     });
 </script>
 
