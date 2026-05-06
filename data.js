@@ -24,8 +24,8 @@ const data = {
                 </ul>
             `,
             images: [
-                "assets/projects/chess1.png",
-                "assets/projects/chess2.png"
+                "assets/projects/chess.png",
+                "assets/projects/chess.png"
             ]
         },
 
@@ -36,7 +36,7 @@ const data = {
                 <p><i>Supports multiple kiosks.</i></p>
             `,
             images: [
-                "assets/projects/billing1.png"
+                "assets/projects/billing.png"
             ]
         }
     ]
