@@ -1,9 +1,11 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: url('assets/bg.png') no-repeat center center fixed;
-    background-size: cover;
     color: #f8fafc;
+}
+
+html {
+    scroll-behavior:auto;
 }
 
 .overlay {
@@ -16,22 +18,34 @@ body {
 
 header {
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 1rem;
+    /* gap: 5rem; */
 }
 
 h1 {
     font-size: 2.8rem;
     color: #facc15;
-    text-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
+    text-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
 }
 
 h2 {
+    color: #04bc01;
+    text-shadow: 0 0 10px #04bc018d;
     border-bottom: 1px solid rgba(255,255,255,0.2);
     margin-bottom: 1rem;
 }
 
+h3 {
+    color: #158bfa;
+    text-shadow: 0 0 10px #2796ff7c;
+}
+
+a {
+    color: #ee9015
+}
+
 section {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .skill {
@@ -39,17 +53,49 @@ section {
     padding: 0.5rem 1rem;
     margin: 0.3rem;
     border-radius: 999px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(3px);
+}
+
+#skills {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 0.2rem;
+}
+
+.about-card {
+    font-size: 20px;
+    background: rgba(157, 28, 238, 0.08);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 5px rgba(157,28,238,0.08);
 }
 
 .card {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 1rem;
-    margin-bottom: 2rem;
-    backdrop-filter: blur(10px);
+    margin-bottom: 1rem;
+    backdrop-filter: blur(3px);
     box-shadow: 0 0 20px rgba(255,255,255,0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.card-header h3 {
+  margin: 0;
+}
+
+.date {
+  font-size: 0.85em;
+  color: #bbbbbb;
 }
 
 .description {
@@ -70,12 +116,103 @@ section {
     transition: transform 0.3s;
 }
 
+.gallery img {
+    cursor: pointer;
+}
+
 .gallery img:hover {
     transform: scale(1.08);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 10, 30, 0.92);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    z-index: 1000;
+}
+
+.modal.visible {
+    display: flex;
+}
+
+.modal-viewer {
+    width: min(90vw, 900px);
+    height: min(80vh, 80vh);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-controls {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #f8fafc;
+}
+
+.zoom-controls label {
+    font-size: 0.95rem;
+}
+
+.zoom-controls input {
+    width: 180px;
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    transform-origin: center center;
+    user-select: none;
+    touch-action: none;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #f8fafc;
+    font-size: 2.2rem;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modal-close:hover {
+    color: #facc15;
 }
 
 footer {
     text-align: center;
     padding: 1rem;
     opacity: 0.7;
+}
+
+#credits_phone {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        /* background: url('assets/bg_phone.webp') no-repeat center center fixed; */
+        /* background-size: cover; */
+        color: #f8fafc;
+    }
+
+    #credits_phone {
+        display: block;
+    }
 }

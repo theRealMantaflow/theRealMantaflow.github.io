@@ -12,7 +12,8 @@
 
 <header>
     <h1 id="name"></h1>
-    <p id="about"></p>
+    <h2 align="left">About Me</h2>
+    <p align="left" id="about"></p>
 </header>
 
 <section>
@@ -21,27 +22,176 @@
 </section>
 
 <section>
+    <h2>Experience</h2>
+    <div id="work_experience"></div>
+</section>
+
+<section>
     <h2>Projects</h2>
     <div id="projects"></div>
 </section>
 
+<section>
+    <h2>Education</h2>
+    <div id="education"></div>
+</section>
+
 <footer>
     <p id="contact"></p>
+    <p id="copyrights"></p>
+    <!-- Display credits_phone only when on phone -->
+    <p id="bgCredits"></p>
 </footer>
+
+<div id="imageModal" class="modal" aria-hidden="true">
+    <div class="modal-close" role="button" aria-label="Close image">×</div>
+    <div class="modal-viewer">
+        <img id="modalImg" class="modal-content" alt="Enlarged project image">
+    </div>
+    <div class="zoom-controls">
+        <label for="zoomSlider">Zoom</label>
+        <input id="zoomSlider" type="range" min="1" max="3" step="0.05" value="1">
+    </div>
+</div>
 
 <script src="data.js"></script>
 <script>
     document.getElementById("name").innerText = data.name;
-    document.getElementById("about").innerText = data.about;
+    document.getElementById("about").innerHTML = data.about;
     document.getElementById("contact").innerHTML = data.contact;
+    document.getElementById("copyrights").innerHTML = data.copyrights;
+    
+    // Random background selection
+    const isPhone = window.innerWidth <= 768;
+    const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
+    const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
+    // split the randomBg into url and credits
+    const [bgUrl, bgCredits] = randomBg.split('|');
+    document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
+    document.body.style.backgroundSize = 'cover';
+    
+    // Decorate the about section
+    const aboutEl = document.getElementById("about");
+    aboutEl.className = "about-card";
+
+    // set the credits for the background image on footer
+    document.getElementById("bgCredits").innerHTML = bgCredits
+
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const modalClose = document.querySelector(".modal-close");
+    const zoomSlider = document.getElementById("zoomSlider");
+
+    let scale = 1;
+    let panX = 0;
+    let panY = 0;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragStartPanX = 0;
+    let dragStartPanY = 0;
+
+    function updateImageTransform() {
+        modalImg.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+        modalImg.style.cursor = scale > 1 ? (dragging ? 'grabbing' : 'grab') : 'zoom-in';
+    }
+
+    function resetImageTransform() {
+        scale = 1;
+        panX = 0;
+        panY = 0;
+        zoomSlider.value = '1';
+        updateImageTransform();
+    }
+
+    function openImageModal(src, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt;
+        resetImageTransform();
+        modal.classList.add("visible");
+        modal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeImageModal() {
+        modal.classList.remove("visible");
+        modal.setAttribute("aria-hidden", "true");
+        modalImg.src = "";
+        resetImageTransform();
+    }
+
+    zoomSlider.addEventListener("input", event => {
+        const newScale = parseFloat(event.target.value);
+        scale = newScale;
+        if (scale <= 1) {
+            panX = 0;
+            panY = 0;
+        }
+        updateImageTransform();
+    });
+
+    let activePointerId = null;
+
+    modalImg.addEventListener("pointerdown", event => {
+        if (scale <= 1) return;
+        event.preventDefault();
+        dragging = true;
+        activePointerId = event.pointerId;
+        dragStartX = event.clientX;
+        dragStartY = event.clientY;
+        dragStartPanX = panX;
+        dragStartPanY = panY;
+        modalImg.setPointerCapture(activePointerId);
+        updateImageTransform();
+    });
+
+    modalImg.addEventListener("pointermove", event => {
+        if (!dragging) return;
+        panX = dragStartPanX + event.clientX - dragStartX;
+        panY = dragStartPanY + event.clientY - dragStartY;
+        updateImageTransform();
+    });
+
+    const stopDragging = event => {
+        if (!dragging) return;
+        if (activePointerId !== null) {
+            modalImg.releasePointerCapture(activePointerId);
+            activePointerId = null;
+        }
+        dragging = false;
+        updateImageTransform();
+    };
+
+    modalImg.addEventListener("pointerup", stopDragging);
+    modalImg.addEventListener("pointercancel", stopDragging);
+    modal.addEventListener("pointerup", stopDragging);
+    modal.addEventListener("pointercancel", stopDragging);
+    modalImg.addEventListener("dragstart", event => event.preventDefault());
 
     // Skills
     const skillsDiv = document.getElementById("skills");
-    data.skills.forEach(skill => {
-        const el = document.createElement("span");
-        el.className = "skill";
-        el.innerText = skill;
-        skillsDiv.appendChild(el);
+    data.skills.forEach(skillObj => {
+        for (const [category, items] of Object.entries(skillObj)) {
+            const el = document.createElement("span");
+            el.className = "skill";
+            el.innerHTML = `<b>${category}</b>: ${items}`;
+            skillsDiv.appendChild(el);
+        }
+    });
+
+    // Work Experience
+    const expDiv = document.getElementById("work_experience");
+    data.work_experience.forEach(exp => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="card-header">
+                <h3>${exp.title}</h3>
+                <span class="date">${exp.duration}</span>
+            </div>
+            <h4>${exp.company}</h4>
+            <div class="description">${exp.description}</div>
+        `;
+        expDiv.appendChild(card);
     });
 
     // Projects with gallery
@@ -57,16 +207,46 @@
         p.images.forEach(img => {
             const image = document.createElement("img");
             image.src = img;
+            image.alt = p.title;
+            image.className = "project-image";
+            image.addEventListener("click", () => openImageModal(img, p.title));
             gallery.appendChild(image);
         });
 
         card.innerHTML = `
-            <h3>${p.title}</h3>
+            <div class="card-header">
+                <h3>${p.title}</h3>
+                <span class="date">${p.date}</span>
+            </div>
             <div class="description">${p.description}</div>
         `;
 
         card.appendChild(gallery);
         projDiv.appendChild(card);
+    });
+
+    modal.addEventListener("click", event => {
+        if (event.target === modal) {
+            closeImageModal();
+        }
+    });
+
+    modalClose.addEventListener("click", closeImageModal);
+
+    // Education Section
+    const educationDiv = document.getElementById("education");
+    data.education.forEach(edu => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="card-header">
+                <h3>${edu.degree}</h3>
+                <span class="date">${edu.duration}</span>
+            </div>
+            <h4>${edu.institution}</h4>
+            <div class="description">${edu.description}</div>
+        `;
+        educationDiv.appendChild(card);
     });
 </script>
 
