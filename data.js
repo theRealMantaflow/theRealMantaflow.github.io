@@ -171,11 +171,11 @@ const data = {
             location: "Kollam, Kerala, India",
             duration: "2021 - 2025",
             description: `
-            Coursework: DSA, Machine Learning, Computer Architecture, Operating Systems, Embedded Systems.<br>
-            Grade: First Class with Distinction (8.32 CGPA)<br>
-            Notable Activities: As part of Student Social Responsibility program, took cyber awareness classes (Beyond the Blueprint) 
+            <b>Coursework:</b> DSA, Machine Learning, Computer Architecture, Operating Systems, Embedded Systems.<br>
+            <b>Grade:</b> First Class with Distinction (8.32 CGPA)<br>
+            <b>Notable Activities:</b> As part of Student Social Responsibility program, took cyber awareness classes (Beyond the Blueprint) 
             for high school students. Received great feedback from their parents.<br>
-            Achievements:<ul>
+            <b>Achievements:</b><ul>
                 <li>Won second place in the Transformer Robot Soccer League (2023), hosted by RoboRoarz Singapore.</li>
                 <li>Won third place at the Smorphi Imaginary Robotics Challenge (2024) and spotted a bug in their platform.</li>
             </ul>
