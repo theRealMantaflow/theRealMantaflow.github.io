@@ -7,18 +7,24 @@
     <title>Sreeram's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
+    <script src="data.js" defer></script>
+    <script src="scripts.js" defer></script>
 </head>
 
 <body>
 
     <div class="overlay"></div>
     <nav class="tabs-container" id="nav-container">
-        <div class="tabs">
-            <button class="tab-button active" onclick="openTab(event, 'tab-about')">About</button>
-            <button class="tab-button" onclick="openTab(event, 'tab-experience')">Experience</button>
-            <button class="tab-button" onclick="openTab(event, 'tab-projects')">Projects</button>
-            <button class="tab-button" onclick="openTab(event, 'tab-education')">Education</button>
+        <button class="scroll-arrow left-arrow" id="scroll-left" aria-label="Scroll left">&#10094;</button>
+
+        <div class="tabs" id="tab-controls">
+            <button class="tab-button active" data-target="tab-about">About</button>
+            <button class="tab-button" data-target="tab-experience">Experience</button>
+            <button class="tab-button" data-target="tab-projects">Projects</button>
+            <button class="tab-button" data-target="tab-education">Education</button>
         </div>
+
+        <button class="scroll-arrow right-arrow" id="scroll-right" aria-label="Scroll right">&#10095;</button>
     </nav>
 
     <main class="content-wrapper">
@@ -30,7 +36,6 @@
             <section>
                 <div class="about-card" style="position: relative;">
                     <img src="assets/gifs_and_pics/ayakaHello.gif" alt="Ayaka Greeting" class="ayaka-gif">
-
                     <h2 align="left" style="margin-top: 0;">About Me</h2>
                     <p align="left" id="about"></p>
                 </div>
@@ -80,9 +85,6 @@
             <input id="zoomSlider" type="range" min="1" max="3" step="0.05" value="1">
         </div>
     </div>
-
-    <script src="data.js"></script>
-    <script src="scripts.js"></script>
 
 </body>
 

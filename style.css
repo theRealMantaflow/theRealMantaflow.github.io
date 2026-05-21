@@ -16,8 +16,10 @@ body {
 
 html {
     scroll-behavior: auto;
-    scrollbar-color: var(--genshin-gold) var(--genshin-dark); /* thumb color | track color */
-    scrollbar-width: auto; /* Options: auto, thin, none */
+    scrollbar-color: var(--genshin-gold) var(--genshin-dark);
+    /* thumb color | track color */
+    scrollbar-width: auto;
+    /* Options: auto, thin, none */
 }
 
 .overlay {
@@ -27,62 +29,75 @@ html {
     width: 100%;
     height: 100%;
     /* Adjusted for better contrast */
-    background: rgba(15, 20, 35, 0.5); 
+    background: rgba(15, 20, 35, 0.5);
     z-index: -1;
 }
 
 /* --- Wanderer Peeking Effect --- */
 .card-container {
-    position: relative; /* This anchors Wanderer now */
-    margin-bottom: 1.5rem; /* Moved from .card to keep spacing correct */
+    position: relative;
+    /* This anchors Wanderer now */
+    margin-bottom: 1.5rem;
+    /* Moved from .card to keep spacing correct */
 }
+
 .card {
-    position: relative; /* This is required to anchor the absolute images */
+    position: relative;
+    /* This is required to anchor the absolute images */
     z-index: 5;
 }
 
 /* --- Wanderer Peeking Effect --- */
 .wanderer-body {
     position: absolute;
-    top: -40px;           
-    right: -80px;        
-    height: 400px;        
-    z-index: 1; /* Sits behind the card (z-index 5) */          
-    pointer-events: none; 
+    top: -40px;
+    right: -80px;
+    height: 400px;
+    z-index: 1;
+    /* Sits behind the card (z-index 5) */
+    pointer-events: none;
     user-select: none;
 }
 
 .wanderer-hand {
     position: absolute;
-    top: 55px;           
-    right: -40px;         
-    width: 54px;         
-    z-index: 10; /* Sits on top of the card (z-index 5) */          
+    top: 53.5px;
+    right: -41px;
+    width: 54px;
+    z-index: 10;
+    /* Sits on top of the card (z-index 5) */
     pointer-events: none;
     user-select: none;
-    filter: drop-shadow(-5px 5px 6px rgba(0, 0, 0, 0.6)); 
+    filter: drop-shadow(-5px 5px 6px rgba(0, 0, 0, 0.6));
 }
 
 /* Hide on mobile */
 @media (max-width: 1024px) {
-    .wanderer-body, .wanderer-hand {
+
+    .wanderer-body,
+    .wanderer-hand {
         display: none;
     }
 }
 
 /* --- Ayaka GIF Styling --- */
 .about-card {
-    position: relative; /* Anchors the absolute positioning of the GIF to this card */
+    position: relative;
+    /* Anchors the absolute positioning of the GIF to this card */
 }
 
 .ayaka-gif {
     position: absolute;
-    top: -45px; /* Pulls her up slightly over the border */
+    top: -45px;
+    /* Pulls her up slightly over the border */
     right: 15px;
-    width: 110px; /* Adjust scale as needed */
+    width: 110px;
+    /* Adjust scale as needed */
     z-index: 10;
-    pointer-events: none; /* Ensures she doesn't block you from highlighting text underneath */
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)); /* Adds depth */
+    pointer-events: none;
+    /* Ensures she doesn't block you from highlighting text underneath */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    /* Adds depth */
 }
 
 /* Mobile Adjustments for the GIF */
@@ -103,10 +118,10 @@ html {
     display: flex;
     justify-content: center;
     /* Reduced padding here to compensate for the padding added inside .tabs */
-    padding: 0 0.5rem; 
+    padding: 0 0.5rem;
     z-index: 100;
     width: fit-content;
-    
+
     background: var(--genshin-glass);
     border: 1px solid rgba(211, 188, 142, 0.3);
     border-radius: 999px;
@@ -123,7 +138,7 @@ html {
     max-width: 100%;
     scrollbar-width: none;
     /* This padding gives the 15px box-shadow enough room to render without hitting the overflow wall */
-    padding: 15px 10px; 
+    padding: 15px 12px;
 
     /* Keep buttons on a single horizontal line and allow smooth touch scrolling on mobile */
     flex-wrap: nowrap;
@@ -131,33 +146,99 @@ html {
     touch-action: pan-x;
 }
 
+/* --- Navigation Scroll Arrows --- */
+.scroll-arrow {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        /* Remove side padding on mobile so arrows can dock strictly to the edges */
+        padding: 0.5rem 0;
+    }
+
+    .tabs {
+        /* Add extra horizontal padding inside the scroll area so the first and last tabs aren't hidden under the arrows */
+        padding: 10px 40px;
+    }
+
+    .scroll-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        color: var(--genshin-gold);
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: opacity 0.3s ease, color 0.2s;
+    }
+
+    .scroll-arrow:hover {
+        color: var(--genshin-light);
+    }
+
+    /* Apply a gradient background matching your glass theme to hide tabs sliding underneath */
+    .left-arrow {
+        left: 0;
+        background: linear-gradient(to right, rgba(30, 35, 50, 0.95) 40%, transparent);
+    }
+
+    .right-arrow {
+        right: 0;
+        background: linear-gradient(to left, rgba(30, 35, 50, 0.95) 40%, transparent);
+    }
+
+    /* Used by JS to hide arrows when fully scrolled */
+    .scroll-arrow.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
 /* Scrolled State (Middle Right, Vertical) */
 /* We only apply this to larger screens so it doesn't break mobile layouts */
 @media (min-width: 769px) {
+
+    /* .tabs {
+        scrollbar-width: thin;
+    } */
+
     .tabs-container.scrolled {
         top: 50%;
-        left: calc(100% - 1.5rem); 
-        transform: translate(-100%, -50%); 
+        left: calc(100% - 1.5rem);
+        transform: translate(-100%, -50%);
         /* Reduced padding here as well */
-        padding: 0.5rem 0; 
-        border-radius: 16px; 
-        background: rgba(30, 35, 50, 0.4); 
+        padding: 0.5rem 0;
+        border-radius: 16px;
+        background: rgba(30, 35, 50, 0.4);
         border-color: rgba(211, 188, 142, 0.15);
+        scrollbar-width: thin;
     }
 
     .tabs-container.scrolled .tabs {
         flex-direction: column;
         /* Swapped the padding to give horizontal room for the glow when the buttons are stacked */
-        padding: 10px 15px; 
+        padding: 10px 15px;
     }
-    
+
     .tabs-container.scrolled .tab-button {
         padding: 0.6rem 1rem;
     }
 }
 
-.tabs::-webkit-scrollbar { 
-    display: none; /* Chrome/Safari */
+/* @media (min-height: 237px){
+
+} */
+
+.tabs::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
 }
 
 .tab-button {
@@ -173,13 +254,13 @@ html {
     white-space: nowrap;
     backdrop-filter: blur(5px);
     font-family: inherit;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .tab-button:hover {
     border-color: var(--genshin-gold);
     box-shadow: 0 0 8px 6px var(--genshin-gold-glow);
-    
+
     background-color: rgba(60, 70, 90, 0.95);
 }
 
@@ -194,13 +275,15 @@ html {
 .content-wrapper {
     max-width: 900px;
     /* Changed margin to add 6rem at the top so it doesn't hide under the nav */
-    margin: 6rem auto 0; 
+    margin: 6rem auto 0;
     min-height: 70vh;
 }
 
 .tab-content {
     display: none;
-    animation: fadeIn 0.2s ease-out;
+    animation: fadeIn 0.25s ease-out forwards;
+    /* Hints the browser to prepare GPU layers */
+    will-change: transform;
 }
 
 .tab-content.active {
@@ -208,10 +291,15 @@ html {
 }
 
 @keyframes fadeIn {
-    /* from { transform: translateX(-15px); }
-    to { transform: translateX(0); } */
-    from { transform: translateY(15px); }
-    to { transform: translateY(0); }
+    from {
+        transform: scale3d(0.5, 0.5, 0.1) translate3d(0, -67px, -500px);
+        /* transform: translate3d(0px, 0px, 300px); */
+    }
+
+    to {
+        transform: scale3d(1,1,1) (0,0,0);
+        /* transform: translate3d(0, 0, 0); */
+    }
 }
 
 header {
@@ -272,7 +360,8 @@ section {
     align-items: center;
 }
 
-.about-card, .card {
+.about-card,
+.card {
     background: var(--genshin-glass);
     border: 1px solid rgba(211, 188, 142, 0.2);
     border-radius: 12px;
@@ -284,7 +373,8 @@ section {
     /* z-index: 100; */
 }
 
-.about-card:hover, .card:hover {
+.about-card:hover,
+.card:hover {
     border-color: rgba(211, 188, 142, 0.5);
 }
 
@@ -448,7 +538,7 @@ footer {
         width: 100%;
         box-sizing: border-box;
     }
-    
+
     .tab-button {
         padding: 0.5rem 1.2rem;
         font-size: 0.95rem;
