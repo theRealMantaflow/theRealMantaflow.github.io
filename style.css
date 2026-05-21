@@ -1,47 +1,249 @@
+/* Genshin Impact Color Palette & Base */
+:root {
+    --genshin-dark: rgb(43, 51, 68);
+    --genshin-light: #ece5d8;
+    --genshin-gold: #d3bc8e;
+    --genshin-gold-glow: rgba(211, 188, 142, 0.5);
+    --genshin-glass: rgba(30, 35, 50, 0.4);
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    color: #f8fafc;
+    color: var(--genshin-light);
+    background-color: var(--genshin-dark);
 }
 
 html {
-    scroll-behavior:auto;
+    scroll-behavior: auto;
+    scrollbar-color: var(--genshin-gold) var(--genshin-dark); /* thumb color | track color */
+    scrollbar-width: auto; /* Options: auto, thin, none */
 }
 
 .overlay {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(5, 10, 30, 0.75);
+    /* Adjusted for better contrast */
+    background: rgba(15, 20, 35, 0.5); 
     z-index: -1;
+}
+
+/* --- Wanderer Peeking Effect --- */
+.card-container {
+    position: relative; /* This anchors Wanderer now */
+    margin-bottom: 1.5rem; /* Moved from .card to keep spacing correct */
+}
+.card {
+    position: relative; /* This is required to anchor the absolute images */
+    z-index: 5;
+}
+
+/* --- Wanderer Peeking Effect --- */
+.wanderer-body {
+    position: absolute;
+    top: -40px;           
+    right: -80px;        
+    height: 400px;        
+    z-index: 1; /* Sits behind the card (z-index 5) */          
+    pointer-events: none; 
+    user-select: none;
+}
+
+.wanderer-hand {
+    position: absolute;
+    top: 55px;           
+    right: -40px;         
+    width: 54px;         
+    z-index: 10; /* Sits on top of the card (z-index 5) */          
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(-5px 5px 6px rgba(0, 0, 0, 0.6)); 
+}
+
+/* Hide on mobile */
+@media (max-width: 1024px) {
+    .wanderer-body, .wanderer-hand {
+        display: none;
+    }
+}
+
+/* --- Ayaka GIF Styling --- */
+.about-card {
+    position: relative; /* Anchors the absolute positioning of the GIF to this card */
+}
+
+.ayaka-gif {
+    position: absolute;
+    top: -45px; /* Pulls her up slightly over the border */
+    right: 15px;
+    width: 110px; /* Adjust scale as needed */
+    z-index: 10;
+    pointer-events: none; /* Ensures she doesn't block you from highlighting text underneath */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)); /* Adds depth */
+}
+
+/* Mobile Adjustments for the GIF */
+@media (max-width: 768px) {
+    .ayaka-gif {
+        width: 85px;
+        top: -35px;
+        right: 10px;
+    }
+}
+
+/* Normal State (Top Center, Horizontal) */
+.tabs-container {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    /* Reduced padding here to compensate for the padding added inside .tabs */
+    padding: 0 0.5rem; 
+    z-index: 100;
+    width: fit-content;
+    
+    background: var(--genshin-glass);
+    border: 1px solid rgba(211, 188, 142, 0.3);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    overflow-x: auto;
+    max-width: 100%;
+    scrollbar-width: none;
+    /* This padding gives the 15px box-shadow enough room to render without hitting the overflow wall */
+    padding: 15px 10px; 
+}
+
+/* Scrolled State (Middle Right, Vertical) */
+/* We only apply this to larger screens so it doesn't break mobile layouts */
+@media (min-width: 769px) {
+    .tabs-container.scrolled {
+        top: 50%;
+        left: calc(100% - 1.5rem); 
+        transform: translate(-100%, -50%); 
+        /* Reduced padding here as well */
+        padding: 0.5rem 0; 
+        border-radius: 16px; 
+        background: rgba(30, 35, 50, 0.4); 
+        border-color: rgba(211, 188, 142, 0.15);
+    }
+
+    .tabs-container.scrolled .tabs {
+        flex-direction: column;
+        /* Swapped the padding to give horizontal room for the glow when the buttons are stacked */
+        padding: 10px 15px; 
+    }
+    
+    .tabs-container.scrolled .tab-button {
+        padding: 0.6rem 1rem;
+    }
+}
+
+.tabs::-webkit-scrollbar { 
+    display: none; /* Chrome/Safari */
+}
+
+.tab-button {
+    background-color: rgba(43, 51, 68, 0.85);
+    border: 2px solid rgba(211, 188, 142, 0.3);
+    color: var(--genshin-light);
+    padding: 0.6rem 1.8rem;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(5px);
+    font-family: inherit;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.tab-button:hover {
+    border-color: var(--genshin-gold);
+    box-shadow: 0 0 8px 6px var(--genshin-gold-glow);
+    
+    background-color: rgba(60, 70, 90, 0.95);
+}
+
+.tab-button.active {
+    background-color: var(--genshin-light);
+    color: var(--genshin-dark);
+    border-color: var(--genshin-light);
+    box-shadow: 0 0 8px 6px var(--genshin-gold-glow);
+}
+
+/* Content Area */
+.content-wrapper {
+    max-width: 900px;
+    /* Changed margin to add 6rem at the top so it doesn't hide under the nav */
+    margin: 6rem auto 0; 
+    min-height: 70vh;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    /* from { transform: translateX(-15px); }
+    to { transform: translateX(0); } */
+    from { transform: translateY(15px); }
+    to { transform: translateY(0); }
 }
 
 header {
     text-align: center;
     padding: 1rem;
-    /* gap: 5rem; */
 }
 
 h1 {
     font-size: 2.8rem;
-    color: #facc15;
-    text-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+    color: var(--genshin-light);
+    text-shadow: 0 0 15px var(--genshin-gold-glow);
+    letter-spacing: 2px;
 }
 
 h2 {
-    color: #04bc01;
-    text-shadow: 0 0 10px #04bc018d;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    margin-bottom: 1rem;
+    color: var(--genshin-gold);
+    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
+    border-bottom: 1px solid rgba(211, 188, 142, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 h3 {
-    color: #158bfa;
-    text-shadow: 0 0 10px #2796ff7c;
+    color: var(--genshin-light);
+    text-shadow: 0 0 20px rgba(211, 192, 155, 0.5);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
 }
 
 a {
-    color: #ee9015
+    color: var(--genshin-gold);
+    text-decoration: none;
+    transition: text-shadow 0.2s;
+}
+
+a:hover {
+    text-shadow: 0 0 8px var(--genshin-gold-glow);
 }
 
 section {
@@ -50,57 +252,71 @@ section {
 
 .skill {
     display: inline-block;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem;
+    padding: 0.5rem 1.2rem;
+    margin: 0.4rem;
     border-radius: 999px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(3px);
+    background: var(--genshin-glass);
+    border: 1px solid rgba(211, 188, 142, 0.2);
+    backdrop-filter: blur(4px);
+    font-size: 0.95rem;
 }
 
 #skills {
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    gap: 0.2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.about-card, .card {
+    background: var(--genshin-glass);
+    border: 1px solid rgba(211, 188, 142, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, border-color 0.2s;
+    /* z-index: 100; */
+}
+
+.about-card:hover, .card:hover {
+    border-color: rgba(211, 188, 142, 0.5);
 }
 
 .about-card {
-    font-size: 20px;
-    background: rgba(157, 28, 238, 0.08);
-    border-radius: 16px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    backdrop-filter: blur(3px);
-    box-shadow: 0 0 5px rgba(157,28,238,0.08);
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    backdrop-filter: blur(3px);
-    box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
 }
 
 .card-header h3 {
-  margin: 0;
+    margin: 0;
 }
 
 .date {
-  font-size: 0.85em;
-  color: #bbbbbb;
+    font-size: 0.9em;
+    color: #a0a8b8;
 }
 
 .description {
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #d8e0e8;
+}
+
+.description ul {
+    padding-left: 1.2rem;
+}
+
+.description li {
+    margin-bottom: 0.4rem;
 }
 
 .gallery {
@@ -108,27 +324,40 @@ section {
     gap: 10px;
     overflow-x: auto;
     padding-bottom: 10px;
+    padding-top: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--genshin-gold) transparent;
 }
 
-.gallery img {
-    height: 180px;
+.gallery::-webkit-scrollbar {
+    height: 6px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background-color: var(--genshin-gold);
     border-radius: 10px;
-    transition: transform 0.3s;
 }
 
 .gallery img {
+    /* padding: 5px; */
+    height: 180px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: transform 0.3s, border-color 0.3s;
     cursor: pointer;
 }
 
 .gallery img:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
+    border-color: var(--genshin-gold);
 }
 
+/* Modal Styling */
 .modal {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(5, 10, 30, 0.92);
+    background: rgba(15, 20, 35, 0.8);
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -142,8 +371,10 @@ section {
 }
 
 .modal-viewer {
-    width: min(90vw, 900px);
-    height: min(80vh, 80vh);
+    width: min(80vw, 900px);
+    height: min(60vh, 80vh);
+    /* width: auto;
+    height: auto; */
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -155,15 +386,7 @@ section {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #f8fafc;
-}
-
-.zoom-controls label {
-    font-size: 0.95rem;
-}
-
-.zoom-controls input {
-    width: 180px;
+    color: var(--genshin-light);
 }
 
 .modal-content {
@@ -171,45 +394,63 @@ section {
     max-height: 100%;
     width: auto;
     height: auto;
-    border-radius: 16px;
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    /* box-shadow: 20px 20px 30px 0px rgba(0, 0, 0, 0.9); */
     transform-origin: center center;
     user-select: none;
     touch-action: none;
+    /* border: 2px solid var(--genshin-gold); */
 }
 
 .modal-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: #f8fafc;
-    font-size: 2.2rem;
+    top: 1.5rem;
+    right: 2rem;
+    color: var(--genshin-light);
+    font-size: 2.5rem;
     line-height: 1;
     cursor: pointer;
     user-select: none;
+    transition: color 0.2s;
 }
 
 .modal-close:hover {
-    color: #facc15;
+    color: var(--genshin-gold);
 }
 
 footer {
     text-align: center;
-    padding: 1rem;
-    opacity: 0.7;
+    /* position: sticky; */
+    padding: 2rem 1rem;
+    opacity: 1;
+    /* bottom: 0; */
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    background: linear-gradient(to top, rgba(15, 20, 35, 0.9) 0%, transparent);
 }
 
 #credits_phone {
     display: none;
 }
 
+/* Mobile Adjustments */
 @media (max-width: 768px) {
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        /* background: url('assets/bg_phone.webp') no-repeat center center fixed; */
-        /* background-size: cover; */
-        color: #f8fafc;
+    .tabs-container {
+        padding: 0.5rem;
+    }
+    
+    .tab-button {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 0.2rem;
     }
 
     #credits_phone {

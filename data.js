@@ -43,28 +43,36 @@ const data = {
 
     // // path | credits
     backgrounds: [
-        "assets/bg.png | Backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg2.jpeg | Backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg3.jpg | Backdrop belongs to the artist, can be removed as per request.",
-        'assets/bg4_downscale.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/113950140" target="_blank">Lik/极夜繁声</a>.'
+        "assets/bg_big/bg.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_big/bg2.jpeg | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_big/bg3.jpg | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        'assets/bg_big/bg4_downscale.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/113950140" target="_blank">Lik/极夜繁声</a>.',
+        'assets/bg_big/bg5.png | Artwork in the backdrop belongs to miHoYo.',
+        'assets/bg_big/bg6.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/110138851" target="_blank">叁柒37</a>.',
+        "assets/bg_big/bg7.png | Artwork in the backdrop belongs to miHoYo.",
     ],
 
     // path | credits
     phone_backgrounds: [
-        `assets/bg_phone.webp | Artwork in the backdrop by <a href="https://dribbble.com/FukoKaichou" target="_blank">Stefany Pauline Moyco</a>.`,
-        "assets/bg_phone2.png | Backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg_phone3.png | Backdrop belongs to the artist, can be removed as per request.",
-        `assets/bg_phone4.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668059" target="_blank">Lik/极夜繁声</a>.`,
-        `assets/bg_phone5.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668167" target="_blank">Lik/极夜繁声</a>.`,
-        `assets/bg_phone6.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668112" target="_blank">Lik/极夜繁声</a>.`
+        `assets/bg_phone/bg_phone.webp | Artwork in the backdrop by <a href="https://dribbble.com/FukoKaichou" target="_blank">Stefany Pauline Moyco</a>.`,
+        "assets/bg_phone/bg_phone2.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_phone/bg_phone3.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        `assets/bg_phone/bg_phone4.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668059" target="_blank">Lik/极夜繁声</a>.`,
+        `assets/bg_phone/bg_phone5.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668167" target="_blank">Lik/极夜繁声</a>.`,
+        `assets/bg_phone/bg_phone6.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668112" target="_blank">Lik/极夜繁声</a>.`,
+        "assets/bg_phone/bg_phone7.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_phone/bg_phone8.png | Artwork in the backdrop belongs to miHoYo.",
     ],
 
     skills: [
         {
-            "Programming Languages" : "C, C++, Python",
-            "Frameworks" : "PyTorch, Qt6, Flask",
-            "Database Engine" : "PostgreSQL",
-            "CAD" : "Altium, PCB Design"
+            "Programming Languages": "C, C++, Python",
+            "Frameworks": "PyTorch, Qt6, Flask",
+            "Database Engine": "PostgreSQL",
+            "CAD": "Altium, TinkerCAD",
+            "Essential Softwares": "Git, Linux, MS Excel, MS Word, MS Publisher, MS PowerPoint, Canva, GIMP, Photoshop",
+            "Life Skills": "Effective Communication, Teamwork, Adaptability, Problem-Solving",
+            "Languages": "English (Full Professional Proficiency), Malayalam (Native), Hindi (Limited Working Proficiency)",
         },
     ],
 
@@ -101,14 +109,18 @@ const data = {
             title: "Inventory & Billing System: Vinventory",
             date: "March 2026",
             description: `
-                <p>Inventory and billing system for Linux, with Qt6 frontend + PostgreSQL backend.</p>
-                <ul>
-                    <li>Developed an inventory and billing software for Linux desktop environments, using Qt6 for the frontend and PostgreSQL for the backend.</li>
-                    <li>Used PostgreSQL as database engine, to enable multiple billing kiosks at the same time.</li>
-                    <li>Simple user interface to enable easy adoption even for clients with relatively low computer literacy.</li>
-                    <li>C++ uses minimal system resources, ensuring compatibility with legacy desktop environments running Linux.</li>
-                </ul>
-                <p>Github link is set to private, since the project has market potential.</p>
+                <p>
+                Inventory and billing system for Linux, with Qt6 frontend + PostgreSQL backend.
+                    <ul>
+                        <li>Developed an inventory and billing software for Linux desktop environments, using Qt6 for the frontend and PostgreSQL for the backend.</li>
+                        <li>Used PostgreSQL as database engine, to enable multiple billing kiosks at the same time.</li>
+                        <li>Simple user interface to enable easy adoption even for clients with relatively low computer literacy.</li>
+                        <li>C++ uses minimal system resources, ensuring compatibility with legacy desktop environments running Linux.</li>
+                    </ul>
+                </p>
+                <p>
+                    Github link is set to private, since the project has market potential.
+                </p>
             `,
             images: [
                 "assets/projects/vinventory/billing.png",
@@ -122,13 +134,16 @@ const data = {
             title: "Chess Engine",
             date: "January 2026",
             description: `
-                <p><b>Modern C++ engine</b> using bitboards.</p>
-                <ul>
-                    <li>Developed a high-performance chess engine from scratch using Modern C++.</li>
-                    <li>Used the concept of Bitboards for efficient memory representation.</li>
-                    <li>Capable of interfacing with any move-generation algorithm.</li>
-                </ul>
-                <p>Github link: <a href="https://github.com/theRealMantaflow/Chess_Engine" target="_blank">Chess Engine</a></p>
+                <p><b>Modern C++</b> chess engine using bitboards.
+                    <ul>
+                        <li>Developed a high-performance chess engine from scratch using Modern C++.</li>
+                        <li>Used the concept of Bitboards for efficient memory representation.</li>
+                        <li>Capable of interfacing with any move-generation algorithm.</li>
+                    </ul>
+                </p>
+                <p>
+                    Github link: <a href="https://github.com/theRealMantaflow/Chess_Engine" target="_blank">Chess Engine</a>
+                </p>
             `,
             images: [
                 // "assets/projects/chess.png",
@@ -140,19 +155,21 @@ const data = {
             title: "LED Chaser on Custom PCB",
             date: "June 2025",
             description: `
-                <p>LED chaser circuit on a custom PCB.</p>
-                <ul>
-                    <li>Designed a heart-shaped PCB using Altium and fabricated the hardware on JLC PCB.</li>
-                    <li>The circuit was successfully simulated using tinkercad.</li>
-                    <li>Implemented timing logic using 555 timers and validated the circuit through soldering and hardware debugging.</li>
-                    <li>A mistake was made during the design of the PCB. This resulted in a shift register getting fried.</li>
-                    <li>Project had to be abandoned due to budget constraints.</li>
-                </ul>
-                <p>TinkerCAD simulation links:</p>
-                <ul>
-                    <li><a href="https://www.tinkercad.com/things/h6gB8uJq0Vs-8-led-chaser?sharecode=oLhxr44sHEzSr3g1d2qc7OvELaihwcHcSUFkKrTk_yw" target="_blank">8 LED Chaser</a></li>
-                    <li><a href="https://www.tinkercad.com/things/dXm5E9AIWAT-bjt-16-led-chaser?sharecode=1yBNKGxQJgIsQG1vqw6ErRM5bbFMc9ulWsKBG9Q2gIA" target="_blank">16 LED Chaser with BJT, derived from 8 LED Chaser</a></li>
-                </ul>
+                <p>LED chaser circuit on a custom PCB.
+                    <ul>
+                        <li>Designed a heart-shaped PCB using Altium and fabricated the hardware on JLC PCB.</li>
+                        <li>The circuit was successfully simulated using tinkercad.</li>
+                        <li>Implemented timing logic using 555 timers and validated the circuit through soldering and hardware debugging.</li>
+                        <li>A mistake was made during the design of the PCB. This resulted in a shift register getting fried.</li>
+                        <li>Project had to be abandoned due to budget constraints.</li>
+                    </ul>
+                </p>
+                <p>TinkerCAD simulation links:
+                    <ul>
+                        <li><a href="https://www.tinkercad.com/things/h6gB8uJq0Vs-8-led-chaser?sharecode=oLhxr44sHEzSr3g1d2qc7OvELaihwcHcSUFkKrTk_yw" target="_blank">8 LED Chaser</a></li>
+                        <li><a href="https://www.tinkercad.com/things/dXm5E9AIWAT-bjt-16-led-chaser?sharecode=1yBNKGxQJgIsQG1vqw6ErRM5bbFMc9ulWsKBG9Q2gIA" target="_blank">16 LED Chaser with BJT, derived from 8 LED Chaser</a></li>
+                    </ul>
+                </p>
             `,
             images: [
                 "assets/projects/led_chaser/pcb_1.png",
@@ -172,12 +189,39 @@ const data = {
             duration: "2021 - 2025",
             description: `
             <b>Coursework:</b> DSA, Machine Learning, Computer Architecture, Operating Systems, Embedded Systems.<br>
-            <b>Grade:</b> First Class with Distinction (8.32 CGPA)<br>
-            <b>Notable Activities:</b> As part of Student Social Responsibility program, took cyber awareness classes (Beyond the Blueprint) 
-            for high school students. Received great feedback from their parents.<br>
-            <b>Achievements:</b><ul>
+            <b>Grade:</b> First Class with Distinction <b>(8.32 CGPA)</b><br>
+            <p>
+                <b><u>Notable Activities:</u></b>
+                <ul>
+                    <li>As part of Student Social Responsibility program, took cyber awareness classes (Beyond the Blueprint) 
+                    for high school students. Received great feedback from their parents.</li>
+                    <li>Volunteered in the admin office to successfully manage and conduct the event Amritavarsham 70, where more than a <b>hundred thousand</b> people participated.</li>
+                    <li>Manged the VVIP guests and their accommodations for the event Amritavarsham 70.</li>
+                </ul>
+            </p>
+            <b><u>Achievements:</u></b>
+            <ul>
                 <li>Won second place in the Transformer Robot Soccer League (2023), hosted by RoboRoarz Singapore.</li>
                 <li>Won third place at the Smorphi Imaginary Robotics Challenge (2024) and spotted a bug in their platform.</li>
+            </ul>
+            `
+        },
+        {
+            institution: "Sri Adwayananda Public School",
+            degree: "Secondary and Higher Secondary Education",
+            location: "Pathanamthitta, Kerala, India",
+            duration: "2017 - 2020",
+            description: `
+            <p>
+                <b>Board:</b> Council for the Indian School Certificate Examinations (CISCE), New Delhi<br>
+                <b>Stream:</b> Physics, Chemistry, Mathematics, Computer Science Stream<br>
+                <b>Grade:</b> 89% overall in Class 10, 84.2% overall in Class 12.<br>
+                <b>Notable Activities:</b> Edited the school magazine for two consecutive years.
+            </p>
+            <b><u>Achievements:</u></b>
+            <ul>
+                <li>Obtained <b>100% marks</b> for Computer Science in Class 10 Board Exams.</li>
+                <li>Obtained <b>99% marks</b> for Computer Science in Class 12 Board Exams.</li>
             </ul>
             `
         }
