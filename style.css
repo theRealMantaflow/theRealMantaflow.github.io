@@ -124,6 +124,11 @@ html {
     scrollbar-width: none;
     /* This padding gives the 15px box-shadow enough room to render without hitting the overflow wall */
     padding: 15px 10px; 
+
+    /* Keep buttons on a single horizontal line and allow smooth touch scrolling on mobile */
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
 }
 
 /* Scrolled State (Middle Right, Vertical) */
@@ -437,11 +442,22 @@ footer {
 @media (max-width: 768px) {
     .tabs-container {
         padding: 0.5rem;
+        /* Make the container span the viewport so inner tabs can scroll freely */
+        left: 0;
+        transform: none;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .tab-button {
         padding: 0.5rem 1.2rem;
         font-size: 0.95rem;
+    }
+
+    /* Ensure the tabs start at the left and have horizontal padding for comfortable swipe */
+    .tabs {
+        justify-content: flex-start;
+        padding: 15px 12px;
     }
 
     h1 {
