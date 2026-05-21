@@ -14,6 +14,43 @@ body {
     background-color: var(--genshin-dark);
 }
 
+header {
+    text-align: center;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 2.8rem;
+    color: var(--genshin-light);
+    text-shadow: 0 0 15px var(--genshin-gold-glow);
+    letter-spacing: 2px;
+}
+
+h2 {
+    color: var(--genshin-gold);
+    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
+    border-bottom: 1px solid rgba(211, 188, 142, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    color: var(--genshin-light);
+    text-shadow: 0 0 20px rgba(211, 192, 155, 0.5);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+a {
+    color: var(--genshin-gold);
+    text-decoration: none;
+    transition: text-shadow 0.2s;
+}
+
+a:hover {
+    text-shadow: 0 0 8px var(--genshin-gold-glow);
+}
+
 html {
     scroll-behavior: auto;
     scrollbar-color: var(--genshin-gold) var(--genshin-dark);
@@ -21,6 +58,47 @@ html {
     scrollbar-width: auto;
     /* Options: auto, thin, none */
 }
+
+/* --- Loading Screen --- */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background-color: var(--genshin-dark);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in, visibility 0.5s ease-out;
+}
+
+.spinner img{
+    width: 200px;
+    height: 200px;
+    /* border: 4px solid rgba(211, 188, 142, 0.3); */
+    /* border-top: 4px solid var(--genshin-gold);
+    border-radius: 50%; */
+    /* animation: spin 1s linear infinite; */
+}
+
+.loadingText {
+    font-size: large;
+    color: var(--genshin-gold);
+    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
+}
+
+/* @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+} */
+
+/* Added via JS when loading is done */
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+/* ===================================== */
 
 .overlay {
     position: fixed;
@@ -300,43 +378,6 @@ html {
         transform: scale3d(1,1,1) (0,0,0);
         /* transform: translate3d(0, 0, 0); */
     }
-}
-
-header {
-    text-align: center;
-    padding: 1rem;
-}
-
-h1 {
-    font-size: 2.8rem;
-    color: var(--genshin-light);
-    text-shadow: 0 0 15px var(--genshin-gold-glow);
-    letter-spacing: 2px;
-}
-
-h2 {
-    color: var(--genshin-gold);
-    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
-    border-bottom: 1px solid rgba(211, 188, 142, 0.3);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-h3 {
-    color: var(--genshin-light);
-    text-shadow: 0 0 20px rgba(211, 192, 155, 0.5);
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-a {
-    color: var(--genshin-gold);
-    text-decoration: none;
-    transition: text-shadow 0.2s;
-}
-
-a:hover {
-    text-shadow: 0 0 8px var(--genshin-gold-glow);
 }
 
 section {

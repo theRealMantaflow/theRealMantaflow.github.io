@@ -11,21 +11,40 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("copyrights").innerHTML = data.copyrights;
 
     const wandererHTML = `
-        <img src="assets/gifs_and_pics/wanderer_peek_.png" class="wanderer-body" alt="Wanderer" loading="lazy">
-        <img src="assets/gifs_and_pics/wanderer_peek_hand.png" class="wanderer-hand" loading="lazy">
+        <img src="assets/gifs_and_pics/wanderer_peek_.png" class="wanderer-body" alt="Wanderer">
+        <img src="assets/gifs_and_pics/wanderer_peek_hand.png" class="wanderer-hand">
     `;
 
     // Background Selection
-    // const isPhone = window.innerWidth <= 768;
-    // const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
-    // const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
-    // const [bgUrl, bgCredits] = randomBg.split('|');
+    const isPhone = window.innerWidth <= 768;
+    const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
+    const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
+    const [bgUrl, bgCredits] = randomBg.split('|');
 
-    // document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
-    // document.body.style.backgroundSize = 'cover';
-    // document.getElementById("bgCredits").innerHTML = bgCredits;
+    document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
+    document.body.style.backgroundSize = 'cover';
+    document.getElementById("bgCredits").innerHTML = bgCredits;
+
+    // Create an image object to preload the background
+    const bgImage = new Image();
+    bgImage.src = bgUrl.trim();
     
-    document.getElementById("bgCredits").innerHTML = window.selectedBgCredits;
+    // Once the image is fully downloaded, apply it and hide the loader
+    bgImage.onload = () => {
+        document.body.style.background = `url(${bgImage.src}) no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+        document.getElementById("bgCredits").innerHTML = bgCredits;
+        
+        // Hide the loading screen
+        document.getElementById("loading-screen").classList.add("hidden");
+        // Destroy the loading screen after the fade-out transition to free up memory
+        setTimeout(() => {
+            const loader = document.getElementById("loading-screen");
+            if (loader) {
+                loader.remove();
+            }
+        }, 500);
+    };
 
     // --- 2. DOM POPULATION (Using Document Fragments for Performance) ---
 

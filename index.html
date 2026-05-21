@@ -13,19 +13,11 @@
 </head>
 
 <body>
-    <script>
-        const isPhone = window.innerWidth <= 768;
-        const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
-        const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
-        const [bgUrl, bgCredits] = randomBg.split('|');
 
-        // Apply instantly to the HTML element (before body even exists)
-        document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
-        document.body.style.backgroundSize = 'cover';
-
-        // Save the credits to window so scripts.js can use it later
-        window.selectedBgCredits = bgCredits;
-    </script>
+    <div id="loading-screen">
+        <div class="spinner"><img src="assets/loading_screen/spinner.gif" alt="Loading..."></div>
+        <div class="loadingText"><p>Loading...</p></div>
+    </div>
     <div class="overlay"></div>
     <nav class="tabs-container" id="nav-container">
         <button class="scroll-arrow left-arrow" id="scroll-left" aria-label="Scroll left">&#10094;</button>
