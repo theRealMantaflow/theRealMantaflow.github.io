@@ -90,6 +90,11 @@ function closeImageModal() {
     modalImg.src = ""; resetImageTransform();
 }
 
+modalClose.addEventListener("click", closeImageModal);
+modal.addEventListener("click", event => {
+    if (event.target === modal) closeImageModal();
+});
+
 zoomSlider.addEventListener("input", event => {
     scale = parseFloat(event.target.value);
     if (scale <= 1) { panX = 0; panY = 0; }
