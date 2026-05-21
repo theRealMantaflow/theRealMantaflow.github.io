@@ -46,25 +46,25 @@ const data = {
 
     // // path | credits
     backgrounds: [
-        "assets/bg_big/bg.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg_big/bg2.jpeg | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg_big/bg3.jpg | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        'assets/bg_big/bg4_downscale.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/113950140" target="_blank">Lik/极夜繁声</a>.',
-        'assets/bg_big/bg5.png | Artwork in the backdrop belongs to miHoYo.',
-        'assets/bg_big/bg6.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/110138851" target="_blank">叁柒37</a>.',
-        "assets/bg_big/bg7.png | Artwork in the backdrop belongs to miHoYo.",
+        "assets/bg_big/bg.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_big/bg2.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_big/bg3.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        'assets/bg_big/bg4_downscale.webp | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/113950140" target="_blank">Lik/极夜繁声</a>.',
+        'assets/bg_big/bg5.webp | Artwork in the backdrop belongs to miHoYo.',
+        'assets/bg_big/bg6.webp | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/110138851" target="_blank">叁柒37</a>.',
+        "assets/bg_big/bg7.webp | Artwork in the backdrop belongs to miHoYo.",
     ],
 
     // path | credits
     phone_backgrounds: [
         `assets/bg_phone/bg_phone.webp | Artwork in the backdrop by <a href="https://dribbble.com/FukoKaichou" target="_blank">Stefany Pauline Moyco</a>.`,
-        "assets/bg_phone/bg_phone2.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg_phone/bg_phone3.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        `assets/bg_phone/bg_phone4.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668059" target="_blank">Lik/极夜繁声</a>.`,
-        `assets/bg_phone/bg_phone5.png | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668167" target="_blank">Lik/极夜繁声</a>.`,
-        `assets/bg_phone/bg_phone6.jpg | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668112" target="_blank">Lik/极夜繁声</a>.`,
-        "assets/bg_phone/bg_phone7.png | Artwork in the backdrop belongs to the artist, can be removed as per request.",
-        "assets/bg_phone/bg_phone8.png | Artwork in the backdrop belongs to miHoYo.",
+        "assets/bg_phone/bg_phone2.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_phone/bg_phone3.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        `assets/bg_phone/bg_phone4.webp | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668059" target="_blank">Lik/极夜繁声</a>.`,
+        `assets/bg_phone/bg_phone5.webp | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668167" target="_blank">Lik/极夜繁声</a>.`,
+        `assets/bg_phone/bg_phone6.webp | Artwork in the backdrop by <a href="https://www.pixiv.net/en/artworks/109668112" target="_blank">Lik/极夜繁声</a>.`,
+        "assets/bg_phone/bg_phone7.webp | Artwork in the backdrop belongs to the artist, can be removed as per request.",
+        "assets/bg_phone/bg_phone8.webp | Artwork in the backdrop belongs to miHoYo.",
     ],
 
     skills: [
