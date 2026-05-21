@@ -2,7 +2,7 @@ backups/
 # ignore the .vscode folder which contains user-specific settings and extensions
 .vscode/
 # ignore everything in the gifs folder except for the ayakaHello.gif file
-/assets/gifs_and_pics/*
+assets/gifs_and_pics/*
 !assets/gifs_and_pics/ayakaHello.gif
 !assets/gifs_and_pics/wanderer_peek_.png
 !assets/gifs_and_pics/wanderer_peek_hand.png
