@@ -7,6 +7,7 @@ const data = {
     Analytical, detail-oriented, and effective in collaborative environments.`,
 
     contact: `
+    <span style="white-space: nowrap;">
         📧 iamsreerams@gmail.com |
         <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 
@@ -22,8 +23,9 @@ const data = {
             -1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
             0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01
             8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-        </svg><a href="https://github.com/theRealMantaflow" target="_blank">GitHub</a> |
-        
+        </svg><a href="https://github.com/theRealMantaflow" target="_blank">GitHub</a>
+    </span> | 
+    <span style="white-space: nowrap;">
         <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: middle; margin-right: 4px;">
              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 
              16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 
@@ -33,6 +35,7 @@ const data = {
              1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 
              0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
         </svg><a href="https://www.linkedin.com/in/realmantaflow/" target="_blank">LinkedIn</a>
+    </span>
     `,
 
     copyrights: `

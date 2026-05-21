@@ -16,14 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     // Background Selection
-    const isPhone = window.innerWidth <= 768;
-    const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
-    const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
-    const [bgUrl, bgCredits] = randomBg.split('|');
+    // const isPhone = window.innerWidth <= 768;
+    // const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
+    // const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
+    // const [bgUrl, bgCredits] = randomBg.split('|');
 
-    document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
-    document.body.style.backgroundSize = 'cover';
-    document.getElementById("bgCredits").innerHTML = bgCredits;
+    // document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
+    // document.body.style.backgroundSize = 'cover';
+    // document.getElementById("bgCredits").innerHTML = bgCredits;
+    
+    document.getElementById("bgCredits").innerHTML = window.selectedBgCredits;
 
     // --- 2. DOM POPULATION (Using Document Fragments for Performance) ---
 

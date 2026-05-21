@@ -7,12 +7,25 @@
     <title>Sreeram's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
-    <script src="data.js" defer></script>
+
+    <script src="data.js"></script>
     <script src="scripts.js" defer></script>
 </head>
 
 <body>
+    <script>
+        const isPhone = window.innerWidth <= 768;
+        const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
+        const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
+        const [bgUrl, bgCredits] = randomBg.split('|');
 
+        // Apply instantly to the HTML element (before body even exists)
+        document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
+        document.body.style.backgroundSize = 'cover';
+
+        // Save the credits to window so scripts.js can use it later
+        window.selectedBgCredits = bgCredits;
+    </script>
     <div class="overlay"></div>
     <nav class="tabs-container" id="nav-container">
         <button class="scroll-arrow left-arrow" id="scroll-left" aria-label="Scroll left">&#10094;</button>
