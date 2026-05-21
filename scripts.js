@@ -20,31 +20,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgs = isPhone ? data.phone_backgrounds : data.backgrounds;
     const randomBg = bgs[Math.floor(Math.random() * bgs.length)];
     const [bgUrl, bgCredits] = randomBg.split('|');
-
-    document.body.style.background = `url(${bgUrl.trim()}) no-repeat center center fixed`;
     document.body.style.backgroundSize = 'cover';
     document.getElementById("bgCredits").innerHTML = bgCredits;
 
-    // Create an image object to preload the background
-    const bgImage = new Image();
-    bgImage.src = bgUrl.trim();
-    
-    // Once the image is fully downloaded, apply it and hide the loader
-    bgImage.onload = () => {
-        document.body.style.background = `url(${bgImage.src}) no-repeat center center fixed`;
-        document.body.style.backgroundSize = 'cover';
-        document.getElementById("bgCredits").innerHTML = bgCredits;
-        
-        // Hide the loading screen
-        document.getElementById("loading-screen").classList.add("hidden");
-        // Destroy the loading screen after the fade-out transition to free up memory
+    // Ensure the loading screen is visible initially (in case CSS hasn't loaded yet)
+    const loaderEl = document.getElementById("loading-screen");
+    if (loaderEl) {
+        loaderEl.style.display = loaderEl.style.display || 'flex';
+    }
+
+    // Helper to hide the loader safely (idempotent)
+    let loaderHidden = false;
+    function hideLoader() {
+        if (loaderHidden) return;
+        loaderHidden = true;
+        const loader = document.getElementById("loading-screen");
+        if (!loader) return;
+        loader.classList.add("hidden");
+        // Remove element after transition to free memory
         setTimeout(() => {
-            const loader = document.getElementById("loading-screen");
-            if (loader) {
-                loader.remove();
-            }
-        }, 500);
+            try { loader.remove(); } catch (e) {}
+        }, 600);
+    }
+
+    // Create an image object to preload the background and handle errors
+    const bgImage = new Image();
+    let bgLoaded = false;
+    bgImage.src = bgUrl.trim();
+    bgImage.onload = () => {
+        bgLoaded = true;
+        try {
+            document.body.style.background = `url(${bgImage.src}) no-repeat center center fixed`;
+            document.body.style.backgroundSize = 'cover';
+            document.getElementById("bgCredits").innerHTML = bgCredits;
+        } catch (e) {}
+        hideLoader();
     };
+    bgImage.onerror = () => {
+        console.warn('Background failed to load, hiding loader after fallback.');
+        hideLoader();
+    };
+
+    // Fallback: if nothing finishes (network blocked/cors/etc.), hide loader after 7s
+    const loaderTimeout = setTimeout(() => {
+        if (!bgLoaded) {
+            console.warn('Loader timeout reached — hiding loader to avoid stuck state.');
+            hideLoader();
+        }
+    }, 7000);
+
+    // Also ensure loader is hidden when the whole window finishes loading (covers other assets)
+    window.addEventListener('load', () => {
+        clearTimeout(loaderTimeout);
+        hideLoader();
+    });
 
     // --- 2. DOM POPULATION (Using Document Fragments for Performance) ---
 
