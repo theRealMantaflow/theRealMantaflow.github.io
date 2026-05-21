@@ -73,6 +73,19 @@ html {
     transition: opacity 0.5s ease-in, visibility 0.5s ease-out;
 }
 
+.loadingText {
+    text-align: center;
+    font-size: x-large;
+    color: var(--genshin-gold);
+    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
+}
+
+/* Added via JS when loading is done */
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .spinner img{
     width: 200px;
     height: 200px;
@@ -81,23 +94,10 @@ html {
     border-radius: 50%; */
     /* animation: spin 1s linear infinite; */
 }
-
-.loadingText {
-    font-size: large;
-    color: var(--genshin-gold);
-    text-shadow: 0 0 20px rgba(211, 188, 142, 0.5);
-}
-
 /* @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 } */
-
-/* Added via JS when loading is done */
-#loading-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
 /* ===================================== */
 
 .overlay {
