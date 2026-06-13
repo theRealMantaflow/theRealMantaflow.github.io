@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/favicon.png">
 
+    <script src="three.min.js"></script>
+    <script src="GLTFLoader.js"></script>
+    <script src="OrbitControls.js"></script>
+
     <script src="data.js"></script>
     <script src="scripts.js" defer></script>
 </head>
@@ -16,7 +20,9 @@
 
     <div id="loading-screen">
         <div class="spinner"><img src="assets/loading_screen/spinner.gif" alt="Loading..."></div>
-        <div class="loadingText"><p>Loading...</p></div>
+        <div class="loadingText">
+            <p>Loading...</p>
+        </div>
     </div>
     <div class="overlay"></div>
     <nav class="tabs-container" id="nav-container">
@@ -33,6 +39,7 @@
     </nav>
 
     <main class="content-wrapper">
+
         <div id="tab-about" class="tab-content active">
             <header>
                 <h1 id="name"></h1>
@@ -44,6 +51,18 @@
                     <h2 align="left" style="margin-top: 0;">About Me</h2>
                     <p align="left" id="about"></p>
                 </div>
+            </section>
+
+            <section id="highlights-section">
+                <div class="ambient-orbs-container">
+                    <div class="ambient-orb orb-1"></div>
+                    <div class="ambient-orb orb-2"></div>
+                    <div class="ambient-orb orb-3"></div>
+                </div>
+
+                <h2>Highlights</h2>
+                <div class="highlights-divider"></div>
+                <div id="highlights-grid" class="highlights-grid"></div>
             </section>
 
             <section>
@@ -88,6 +107,12 @@
         <div class="zoom-controls">
             <label for="zoomSlider">Zoom</label>
             <input id="zoomSlider" type="range" min="1" max="3" step="0.05" value="1">
+        </div>
+    </div>
+
+    <div id="stlModal" class="modal" aria-hidden="true">
+        <div class="modal-close" id="stlModalClose" role="button" aria-label="Close 3D viewer">×</div>
+        <div id="stlViewerContainer" class="modal-viewer stl-modal-viewer">
         </div>
     </div>
 

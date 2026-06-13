@@ -1,0 +1,61 @@
+    // --- Lighting Setup ---
+
+    // 1. Hemisphere Light (Soft ambient light)
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.8);
+    hemiLight.position.set(0, -10, 0);
+    // stlScene.add(hemiLight);
+
+    // const dirLightTopF = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.5);
+    // dirLightTopF.position.set(-3, 15, 10);
+    // stlScene.add(dirLightTopF);
+
+    // const dirLightTopB = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.5);
+    // dirLightTopB.position.set(20, 15, -10);
+    // stlScene.add(dirLightTopB);
+
+    // 2. Main Key Lights (Bright light from above and slightly to left)
+    const dirLightTopF = new THREE.DirectionalLight(0xffffff, 2);
+    dirLightTopF.position.set(-30, 20, 100);
+    dirLightTopF.castShadow = true;
+
+    // Crank up the resolution for crisp PCB component shadows
+    dirLightTopF.shadow.mapSize.width = 2048;
+    dirLightTopF.shadow.mapSize.height = 2048;
+
+    // Define the box area where shadows are calculated
+    dirLightTopF.shadow.camera.left = -15;
+    dirLightTopF.shadow.camera.right = 15;
+    dirLightTopF.shadow.camera.top = 15;
+    dirLightTopF.shadow.camera.bottom = -15;
+
+    // Crucial for flat PCBs: prevents shadow glitching on the board surface
+    dirLightTopF.shadow.bias = -0.0005;
+
+    camera.add(dirLightTopF);
+
+    // Bright light from above and slightly to the back-right
+    const dirLightTopR = new THREE.DirectionalLight(0xffffff, 2);
+    dirLightTopR.position.set(30, 20, 100);
+    dirLightTopR.castShadow = true;
+
+    // Crank up the resolution for crisp PCB component shadows
+    dirLightTopR.shadow.mapSize.width = 2048;
+    dirLightTopR.shadow.mapSize.height = 2048;
+
+    // Define the box area where shadows are calculated
+    dirLightTopR.shadow.camera.left = -15;
+    dirLightTopR.shadow.camera.right = 15;
+    dirLightTopR.shadow.camera.top = 15;
+    dirLightTopR.shadow.camera.bottom = -15;
+
+    // Crucial for flat PCBs: prevents shadow glitching on the board surface
+    dirLightTopR.shadow.bias = -0.0005;
+
+    // camera.add(dirLightTopR);
+
+    // 3. Bottom Fill Light (Slightly softer light pointing directly up from below)
+    const dirLightBottom = new THREE.DirectionalLight(0xffffff, 2);
+    dirLightBottom.position.set(0, -15, 0);
+    // stlScene.add(dirLightBottom);
+
+    stlScene.add(camera);

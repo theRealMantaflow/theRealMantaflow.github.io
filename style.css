@@ -1,3 +1,21 @@
+/*
+ * ==========================================
+ * TABLE OF CONTENTS
+ * ==========================================
+ * 1. Variables & Base Defaults
+ * 2. Typography & Globals
+ * 3. Loading Screen & Overlays
+ * 4. Layout & Content Wrappers
+ * 5. Navigation (Tabs & Arrows)
+ * 6. UI Components (Cards, Skills, Badges)
+ * 7. Highlights Section & Orbs
+ * 8. Modals (Images & 3D Viewer)
+ * 9. Media Queries (Mobile Adjustments)
+ * ==========================================
+ */
+
+/* 1. Variables & Base Defaults */
+
 /* Genshin Impact Color Palette & Base */
 :root {
     --genshin-dark: rgb(43, 51, 68);
@@ -14,10 +32,15 @@ body {
     background-color: var(--genshin-dark);
 }
 
-header {
-    text-align: center;
-    padding: 1rem;
+html {
+    scroll-behavior: auto;
+    scrollbar-color: var(--genshin-gold) var(--genshin-dark);
+    /* thumb color | track color */
+    scrollbar-width: auto;
+    /* Options: auto, thin, none */
 }
+
+/* 2. Typography & Globals */
 
 h1 {
     font-size: 2.8rem;
@@ -51,15 +74,23 @@ a:hover {
     text-shadow: 0 0 8px var(--genshin-gold-glow);
 }
 
-html {
-    scroll-behavior: auto;
-    scrollbar-color: var(--genshin-gold) var(--genshin-dark);
-    /* thumb color | track color */
-    scrollbar-width: auto;
-    /* Options: auto, thin, none */
+header {
+    text-align: center;
+    padding: 1rem;
 }
 
-/* --- Loading Screen --- */
+footer {
+    text-align: center;
+    /* position: sticky; */
+    padding: 2rem 1rem;
+    opacity: 1;
+    /* bottom: 0; */
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    background: linear-gradient(to top, rgba(15, 20, 35, 0.9) 0%, transparent);
+}
+
+/* 3. Loading Screen & Overlays */
 #loading-screen {
     position: fixed;
     inset: 0;
@@ -98,7 +129,6 @@ html {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 } */
-/* ===================================== */
 
 .overlay {
     position: fixed;
@@ -111,82 +141,43 @@ html {
     z-index: -1;
 }
 
-/* --- Wanderer Peeking Effect --- */
-.card-container {
-    position: relative;
-    /* This anchors Wanderer now */
-    margin-bottom: 1.5rem;
-    /* Moved from .card to keep spacing correct */
+/* 4. Layout & Content Wrappers */
+.content-wrapper {
+    max-width: 900px;
+    /* Changed margin to add 6rem at the top so it doesn't hide under the nav */
+    margin: 6rem auto 0;
+    min-height: 70vh;
 }
 
-.card {
-    position: relative;
-    /* This is required to anchor the absolute images */
-    z-index: 5;
+.tab-content {
+    display: none;
+    animation: fadeIn 0.25s ease-out forwards;
+    /* Hints the browser to prepare GPU layers */
+    will-change: transform;
 }
 
-/* --- Wanderer Peeking Effect --- */
-.wanderer-body {
-    position: absolute;
-    top: -40px;
-    right: -80px;
-    height: 400px;
-    z-index: 1;
-    /* Sits behind the card (z-index 5) */
-    pointer-events: none;
-    user-select: none;
+.tab-content.active {
+    display: block;
 }
 
-.wanderer-hand {
-    position: absolute;
-    top: 53.5px;
-    right: -41px;
-    width: 54px;
-    z-index: 10;
-    /* Sits on top of the card (z-index 5) */
-    pointer-events: none;
-    user-select: none;
-    filter: drop-shadow(-5px 5px 6px rgba(0, 0, 0, 0.6));
-}
+@keyframes fadeIn {
+    from {
+        transform: scale3d(0.5, 0.5, 0.1) translate3d(0, -67px, -500px);
+        /* transform: translate3d(0px, 0px, 300px); */
+    }
 
-/* Hide on mobile */
-@media (max-width: 1024px) {
-
-    .wanderer-body,
-    .wanderer-hand {
-        display: none;
+    to {
+        transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+        /* transform: scale3d(1,1,1) (0,0,0); */
+        /* transform: translate3d(0, 0, 0); */
     }
 }
 
-/* --- Ayaka GIF Styling --- */
-.about-card {
-    position: relative;
-    /* Anchors the absolute positioning of the GIF to this card */
+section {
+    padding: 1rem;
 }
 
-.ayaka-gif {
-    position: absolute;
-    top: -45px;
-    /* Pulls her up slightly over the border */
-    right: 15px;
-    width: 110px;
-    /* Adjust scale as needed */
-    z-index: 10;
-    pointer-events: none;
-    /* Ensures she doesn't block you from highlighting text underneath */
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
-    /* Adds depth */
-}
-
-/* Mobile Adjustments for the GIF */
-@media (max-width: 768px) {
-    .ayaka-gif {
-        width: 85px;
-        top: -35px;
-        right: 10px;
-    }
-}
-
+/* 5. Navigation (Tabs & Arrows) */
 /* Normal State (Top Center, Horizontal) */
 .tabs-container {
     position: fixed;
@@ -224,96 +215,10 @@ html {
     touch-action: pan-x;
 }
 
-/* --- Navigation Scroll Arrows --- */
 .scroll-arrow {
     display: none;
     /* Hidden on desktop */
 }
-
-@media (max-width: 768px) {
-    .tabs-container {
-        /* Remove side padding on mobile so arrows can dock strictly to the edges */
-        padding: 0.5rem 0;
-    }
-
-    .tabs {
-        /* Add extra horizontal padding inside the scroll area so the first and last tabs aren't hidden under the arrows */
-        padding: 10px 40px;
-    }
-
-    .scroll-arrow {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 40px;
-        color: var(--genshin-gold);
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        z-index: 10;
-        transition: opacity 0.3s ease, color 0.2s;
-    }
-
-    .scroll-arrow:hover {
-        color: var(--genshin-light);
-    }
-
-    /* Apply a gradient background matching your glass theme to hide tabs sliding underneath */
-    .left-arrow {
-        left: 0;
-        background: linear-gradient(to right, rgba(30, 35, 50, 0.95) 40%, transparent);
-    }
-
-    .right-arrow {
-        right: 0;
-        background: linear-gradient(to left, rgba(30, 35, 50, 0.95) 40%, transparent);
-    }
-
-    /* Used by JS to hide arrows when fully scrolled */
-    .scroll-arrow.hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-}
-
-/* Scrolled State (Middle Right, Vertical) */
-/* We only apply this to larger screens so it doesn't break mobile layouts */
-@media (min-width: 769px) {
-
-    /* .tabs {
-        scrollbar-width: thin;
-    } */
-
-    .tabs-container.scrolled {
-        top: 50%;
-        left: calc(100% - 1.5rem);
-        transform: translate(-100%, -50%);
-        /* Reduced padding here as well */
-        padding: 0.5rem 0;
-        border-radius: 16px;
-        background: rgba(30, 35, 50, 0.4);
-        border-color: rgba(211, 188, 142, 0.15);
-        scrollbar-width: thin;
-    }
-
-    .tabs-container.scrolled .tabs {
-        flex-direction: column;
-        /* Swapped the padding to give horizontal room for the glow when the buttons are stacked */
-        padding: 10px 15px;
-    }
-
-    .tabs-container.scrolled .tab-button {
-        padding: 0.6rem 1rem;
-    }
-}
-
-/* @media (min-height: 237px){
-
-} */
-
 .tabs::-webkit-scrollbar {
     display: none;
     /* Chrome/Safari */
@@ -349,56 +254,19 @@ html {
     box-shadow: 0 0 8px 6px var(--genshin-gold-glow);
 }
 
-/* Content Area */
-.content-wrapper {
-    max-width: 900px;
-    /* Changed margin to add 6rem at the top so it doesn't hide under the nav */
-    margin: 6rem auto 0;
-    min-height: 70vh;
+/* 6. UI Components */
+/* --- Wanderer Peeking Effect --- */
+.card-container {
+    position: relative;
+    /* This anchors Wanderer now */
+    margin-bottom: 1.5rem;
+    /* Moved from .card to keep spacing correct */
 }
 
-.tab-content {
-    display: none;
-    animation: fadeIn 0.25s ease-out forwards;
-    /* Hints the browser to prepare GPU layers */
-    will-change: transform;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        transform: scale3d(0.5, 0.5, 0.1) translate3d(0, -67px, -500px);
-        /* transform: translate3d(0px, 0px, 300px); */
-    }
-
-    to {
-        transform: scale3d(1,1,1) (0,0,0);
-        /* transform: translate3d(0, 0, 0); */
-    }
-}
-
-section {
-    padding: 1rem;
-}
-
-.skill {
-    display: inline-block;
-    padding: 0.5rem 1.2rem;
-    margin: 0.4rem;
-    border-radius: 999px;
-    background: var(--genshin-glass);
-    border: 1px solid rgba(211, 188, 142, 0.2);
-    backdrop-filter: blur(4px);
-    font-size: 0.95rem;
-}
-
-#skills {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.card {
+    position: relative;
+    /* This is required to anchor the absolute images */
+    z-index: 5;
 }
 
 .about-card,
@@ -488,7 +356,380 @@ section {
     border-color: var(--genshin-gold);
 }
 
-/* Modal Styling */
+/* --- Wanderer Peeking Effect --- */
+.wanderer-body {
+    position: absolute;
+    top: -40px;
+    right: -80px;
+    height: 400px;
+    z-index: 1;
+    /* Sits behind the card (z-index 5) */
+    pointer-events: none;
+    user-select: none;
+}
+
+.wanderer-hand {
+    position: absolute;
+    top: 53.5px;
+    right: -41px;
+    width: 54px;
+    z-index: 10;
+    /* Sits on top of the card (z-index 5) */
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(-5px 5px 6px rgba(0, 0, 0, 0.6));
+}
+
+/* Hide on mobile */
+@media (max-width: 1024px) {
+
+    .wanderer-body,
+    .wanderer-hand {
+        display: none;
+    }
+}
+
+/* --- Ayaka GIF Styling --- */
+.about-card {
+    position: relative;
+    /* Anchors the absolute positioning of the GIF to this card */
+}
+
+.ayaka-gif {
+    position: absolute;
+    top: -45px;
+    /* Pulls her up slightly over the border */
+    right: 15px;
+    width: 110px;
+    /* Adjust scale as needed */
+    z-index: 10;
+    pointer-events: none;
+    /* Ensures she doesn't block you from highlighting text underneath */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    /* Adds depth */
+}
+
+/* Mobile Adjustments for the GIF */
+@media (max-width: 768px) {
+    .ayaka-gif {
+        width: 85px;
+        top: -35px;
+        right: 10px;
+    }
+}
+
+.skill {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    margin: 0.4rem;
+    border-radius: 999px;
+    background: var(--genshin-glass);
+    border: 1px solid rgba(211, 188, 142, 0.2);
+    backdrop-filter: blur(4px);
+    font-size: 0.95rem;
+}
+
+#skills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* 7. Highlights Section & Orbs */
+#highlights-section {
+    position: relative;
+    padding: 2rem 2rem;
+    margin: 2rem 0;
+    background: linear-gradient(180deg, rgba(30, 35, 50, 0.3) 0%, rgba(43, 51, 68, 0.7) 50%, rgba(30, 35, 50, 0.3) 100%);
+    border-top: 1px solid rgba(211, 188, 142, 0.3);
+    border-bottom: 1px solid rgba(211, 188, 142, 0.3);
+    border-radius: 24px;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.4), 0 15px 35px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+/* Decorative Heading */
+#highlights-section h2 {
+    position: relative;
+    text-align: center;
+    border-bottom: none; /* Remove default underline */
+    margin-bottom: 0.2rem;
+    font-size: 2.2rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--genshin-light);
+    text-shadow: 0 0 20px rgba(211, 188, 142, 0.6);
+}
+
+/* Glowing stars next to the heading */
+#highlights-section h2::before,
+#highlights-section h2::after {
+    content: '✦';
+    font-size: 1.5rem;
+    color: var(--genshin-gold);
+    text-shadow: 0 0 15px var(--genshin-gold-glow);
+    opacity: 0.9;
+}
+
+/* Elegant diamond divider below the heading */
+.highlights-divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--genshin-gold), transparent);
+    margin: 0 auto 2rem auto;
+    position: relative;
+    z-index: 1;
+}
+
+.highlights-divider::after {
+    content: '♦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--genshin-gold);
+    font-size: 1rem;
+    text-shadow: 0 0 10px var(--genshin-gold-glow);
+    background-color: transparent;
+}
+
+.highlight-image-container {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 2px solid rgba(211, 188, 142, 0.1);
+}
+
+.highlight-image {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+
+.highlight-title {
+    font-size: 1.4rem;
+    color: var(--genshin-gold);
+    text-shadow: 0 0 15px rgba(211, 188, 142, 0.4);
+    margin: 0 0 0.5rem 0;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.highlight-card:hover .highlight-title {
+    color: #fff;
+    text-shadow: 0 0 20px var(--genshin-gold);
+}
+
+.highlight-date {
+    font-size: 0.85rem;
+    color: #a0a8b8;
+    margin-bottom: 1.5rem;
+}
+
+/* ===================================== */
+/* --- Ambient Floating Orbs --- */
+/* ===================================== */
+.ambient-orbs-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0; /* Keeps it behind the cards */
+}
+
+.ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    /* Greatly increased opacity so it punches through the dark theme */
+    background: radial-gradient(circle, rgba(211, 188, 142, 0.6) 0%, rgba(211, 188, 142, 0.35) 40%, transparent 70%);
+    /* Reduced blur so the core remains visible */
+    filter: blur(20px);
+    mix-blend-mode: screen; /* Helps the light colors "glow" over the dark background */
+}
+
+/* Orb 1: Large, starts top-left */
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    top: -10%;
+    left: -10%;
+    animation: floatOrb1 25s ease-in-out infinite alternate;
+}
+
+/* Orb 2: Medium, starts bottom-right */
+.orb-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -20%;
+    right: -10%;
+    animation: floatOrb2 22s ease-in-out infinite alternate-reverse;
+}
+
+/* Orb 3: Small, starts in the middle */
+.orb-3 {
+    width: 250px;
+    height: 250px;
+    top: 40%;
+    left: 30%;
+    animation: floatOrb3 18s ease-in-out infinite alternate;
+}
+
+/* Random drift paths for each orb */
+@keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(250px, 150px) scale(1.2); }
+    66% { transform: translate(100px, 350px) scale(0.9); }
+    100% { transform: translate(450px, 50px) scale(1.1); }
+}
+
+@keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-200px, -250px) scale(1.3); }
+    66% { transform: translate(-450px, 50px) scale(0.8); }
+    100% { transform: translate(-100px, -350px) scale(1); }
+}
+
+@keyframes floatOrb3 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(250px, -150px) scale(1.1); }
+    66% { transform: translate(-150px, -100px) scale(1.4); }
+    100% { transform: translate(150px, 200px) scale(0.9); }
+}
+
+/* Ensure the grid and cards sit above the rotating background */
+.highlights-grid {
+    position: relative;
+    z-index: 1;
+    /* ...keep your existing .highlights-grid styles below this... */
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding: 1rem 0;
+}
+
+.highlight-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(43, 51, 68, 0.8), rgba(30, 35, 50, 0.95));
+    border: 1px solid rgba(211, 188, 142, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Bouncy transition for popping effect */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.highlight-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--genshin-gold);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(211, 188, 142, 0.3);
+}
+
+/* Image zooms and slightly tilts on hover */
+.highlight-card:hover .highlight-image {
+    transform: scale(1.1) rotate(1deg);
+}
+
+/* Smooth gradient so the image fades into the card body */
+.highlight-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30, 35, 50, 1) 0%, rgba(30, 35, 50, 0.2) 50%, transparent 100%);
+    pointer-events: none;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #d3bc8e, #a88d55);
+    color: var(--genshin-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+.highlight-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    z-index: 2;
+}
+
+/* Fancy sweep button */
+.view-project-btn {
+    margin-top: auto;
+    align-self: flex-start;
+    background: transparent;
+    color: var(--genshin-gold);
+    border: 2px solid var(--genshin-gold);
+    padding: 0.6rem 1.5rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: box-shadow 0.3s ease;
+}
+
+.view-project-btn span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+/* Background fill sweeping animation */
+.view-project-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--genshin-gold);
+    z-index: 0;
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+/* Trigger button animation when hovering anywhere on the card */
+.highlight-card:hover .view-project-btn::before,
+.view-project-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.highlight-card:hover .view-project-btn span,
+.view-project-btn:hover span {
+    color: var(--genshin-dark);
+}
+
+.highlight-card:hover .view-project-btn {
+    box-shadow: 0 0 15px var(--genshin-gold-glow);
+}
+/* ================================================= */
+
+/* 8. Modals (Images & 3D Viewer) */
 .modal {
     display: none;
     position: fixed;
@@ -554,21 +795,126 @@ section {
     color: var(--genshin-gold);
 }
 
-footer {
-    text-align: center;
-    /* position: sticky; */
-    padding: 2rem 1rem;
-    opacity: 1;
-    /* bottom: 0; */
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    background: linear-gradient(to top, rgba(15, 20, 35, 0.9) 0%, transparent);
+.stl-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(211, 188, 142, 0.3);
 }
 
+.view-stl-btn {
+    background: transparent;
+    color: var(--genshin-gold);
+    border: 1px solid var(--genshin-gold);
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.view-stl-btn span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.view-stl-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--genshin-gold);
+    z-index: 0;
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.view-stl-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.view-stl-btn:hover span {
+    color: var(--genshin-dark);
+}
+
+.view-stl-btn:hover {
+    box-shadow: 0 0 10px var(--genshin-gold-glow);
+}
+/* --- STL Modal Adjustments --- */
+.stl-modal-viewer {
+    width: min(90vw, 1000px);
+    height: min(70vh, 800px);
+    background-color: var(--genshin-dark);
+    border: 2px solid rgba(211, 188, 142, 0.3);
+    border-radius: 12px;
+    position: relative;
+}
+
+.stl-loading-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--genshin-gold);
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px var(--genshin-gold-glow);
+    pointer-events: none;
+}
+/* --- STL Viewer Container --- */
+.stl-container {
+    position: relative;
+    height: 180px;
+    min-width: 250px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-color: rgba(30, 35, 50, 0.6);
+    overflow: hidden;
+    cursor: grab;
+    transition: transform 0.3s, border-color 0.3s;
+    flex-shrink: 0;
+}
+
+.stl-container:active {
+    cursor: grabbing;
+}
+
+.stl-container:hover {
+    border-color: var(--genshin-gold);
+    transform: scale(1.02);
+}
+
+.stl-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(43, 51, 68, 0.85);
+    color: var(--genshin-gold);
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid var(--genshin-gold);
+    pointer-events: none; /* Allows mouse interactions to pass through to the 3D canvas */
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+
+/* 9. Media Queries (Mobile Adjustments) */
 #credits_phone {
     display: none;
 }
-
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .tabs-container {
@@ -602,5 +948,82 @@ footer {
 
     #credits_phone {
         display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        /* Remove side padding on mobile so arrows can dock strictly to the edges */
+        padding: 0.5rem 0;
+    }
+
+    .tabs {
+        /* Add extra horizontal padding inside the scroll area so the first and last tabs aren't hidden under the arrows */
+        padding: 10px 40px;
+    }
+
+    .scroll-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        color: var(--genshin-gold);
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: opacity 0.3s ease, color 0.2s;
+    }
+
+    .scroll-arrow:hover {
+        color: var(--genshin-light);
+    }
+
+    /* Apply a gradient background matching your glass theme to hide tabs sliding underneath */
+    .left-arrow {
+        left: 0;
+        background: linear-gradient(to right, rgba(30, 35, 50, 0.95) 40%, transparent);
+    }
+
+    .right-arrow {
+        right: 0;
+        background: linear-gradient(to left, rgba(30, 35, 50, 0.95) 40%, transparent);
+    }
+
+    /* Used by JS to hide arrows when fully scrolled */
+    .scroll-arrow.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+}
+
+/* Scrolled State (Middle Right, Vertical) */
+/* We only apply this to larger screens so it doesn't break mobile layouts */
+@media (min-width: 769px) {
+
+    .tabs-container.scrolled {
+        top: 50%;
+        left: calc(100% - 1.5rem);
+        transform: translate(-100%, -50%);
+        /* Reduced padding here as well */
+        padding: 0.5rem 0;
+        border-radius: 16px;
+        background: rgba(30, 35, 50, 0.4);
+        border-color: rgba(211, 188, 142, 0.15);
+        scrollbar-width: thin;
+    }
+
+    .tabs-container.scrolled .tabs {
+        flex-direction: column;
+        /* Swapped the padding to give horizontal room for the glow when the buttons are stacked */
+        padding: 10px 15px;
+    }
+
+    .tabs-container.scrolled .tab-button {
+        padding: 0.6rem 1rem;
     }
 }
