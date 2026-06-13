@@ -128,6 +128,7 @@ const data = {
                     <ul>
                         <li>Designed the layout for the keyboard with KLE.</li>
                         <li>Wired up the circuit in KiCAD referring to the STM32F405RGT datasheet.</li>
+                        <li>Compatible with <a href="https://docs.qmk.fm/" target="_blank">Quantum Mechanical Keyboard Firmware (QMK)</a>.</li>
                         <li>Placed and routed the components to fit the design requirements.</li>
                         <li>Designed the parts for the case in FreeCAD.</li>
                         <li>Fabrication has not yet been done, due to the total cost of the project.</li>
